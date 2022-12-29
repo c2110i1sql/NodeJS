@@ -2,6 +2,8 @@ const express = require('express');
 
 const server = express();
 
+server.use(express.static('public'));
+
 server.get('/', function(req, res) {
     // res.send("<h1> Hello NodeJS</h1>");
     res.sendFile(__dirname + '/index.html')

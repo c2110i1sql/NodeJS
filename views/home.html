@@ -12,6 +12,36 @@
             </div>
         </div>
 
+            <h2>Danh mục</h2>
+
+            <hr>
+            
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% cats.forEach(function(cat) { %>
+                    <tr>
+                        <td><%= cat.id %></td>
+                        <td><%= cat.name %></td>
+                        <td><%= cat.status == 0 ? 'Tạm ẩn' : 'Hiển thị' %></td>
+                        <td><%= cat.created_at %></td>
+                        <td class="pull-right">
+                            <a href="" class="btn btn-sm btn-primary">Sửa</a>
+                            <a href="" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+            
     </div>
 
     <%- include('footer.html') %>

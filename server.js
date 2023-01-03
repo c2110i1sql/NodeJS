@@ -1,22 +1,21 @@
 const express = require('express');
+const ejs = require('ejs');
 
 const server = express();
-
 server.use(express.static('public'));
-
+server.set('view engine', 'html');
+server.engine('html',ejs.renderFile)
 server.get('/', function(req, res) {
     // res.send("<h1> Hello NodeJS</h1>");
-    res.sendFile(__dirname + '/index.html')
+    res.render('home')
 });
-// http://localhost:3000/about/bach
-server.get('/about/:name', function(req, res) {
-    // res.send("<h1> Hello about</h1>");
-    console.log(req.params);
+
+server.get('/about', function(req, res) {
+    res.render('about')
 });
-// http://localhost:3000/hello?name=Minh
-server.get('/hello', function(req, res) {
-    // res.send("<h1> Hello about</h1>");
-    console.log(req.query);
+
+server.get('/contact', function(req, res) {
+    res.render('contact')
 });
 
 server.listen(3000, function() {

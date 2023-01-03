@@ -1,0 +1,51 @@
+<div class="container">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hello, world!</h1>
+            <p>Contents ...</p>
+            <p>
+                <a class="btn btn-primary btn-lg">Learn more</a>
+            </p>
+        </div>
+    </div>
+
+    <h2>Danh mục</h2>
+
+    <hr>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% cats.forEach(function(cat) { %>
+                <tr>
+                    <td>
+                        <%= cat.id %>
+                    </td>
+                    <td>
+                        <%= cat.name %>
+                    </td>
+                    <td>
+                        <%= cat.status==0 ? 'Tạm ẩn' : 'Hiển thị' %>
+                    </td>
+                    <td>
+                        <%= cat.created_at %>
+                    </td>
+                    <td class="pull-right">
+                        <a href="" class="btn btn-sm btn-primary">Sửa</a>
+                        <a href="" class="btn btn-sm btn-danger">Xóa</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+</div>

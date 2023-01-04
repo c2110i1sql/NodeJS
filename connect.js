@@ -4,7 +4,8 @@ const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'laravel9'
+    database: 'laravel9',
+    multipleStatements: true
 })
 
 conn.connect(function(err) {

@@ -1,0 +1,53 @@
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Danh sách</h3>
+        <br>
+        
+        <form action="" method="POST" class="form-inline" role="form">
+        
+            <div class="form-group">
+                <label class="sr-only" for="">label</label>
+                <input type="email" class="form-control" id="" placeholder="Input field">
+            </div>
+        
+            
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <hr>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% cats.forEach(function(cat) { %>
+                    <tr>
+                        <td>
+                            <%= cat.id %>
+                        </td>
+                        <td>
+                            <%= cat.name %>
+                        </td>
+                        <td>
+                            <%= cat.status==0 ? 'Tạm ẩn' : 'Hiển thị' %>
+                        </td>
+                        <td>
+                            <%= cat.created_at %>
+                        </td>
+                        <td class="pull-right">
+                            <a href="/admin/category/edit/<%=cat.id%>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                            <a href="/admin/category/delete/<%=cat.id%>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

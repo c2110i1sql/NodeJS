@@ -1,0 +1,67 @@
+<%- include('../header.html') %>
+  <!-- =============================================== -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        QUản lý danh mục
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-body">
+           <div class="row">
+            <div class="col-md-4">
+                
+               
+               <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="/admin/category/update/<%= catEdit.id %>" method="POST" role="form">
+                        <h3>Thêm mới</h3>
+                    
+                        <div class="form-group">
+                            <label for="">Tên danh mục</label>
+                            <input type="text" value="<%=catEdit.name%>" class="form-control" name="name" placeholder="Input field">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Trạng thái</label>
+                            
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="status" value="1" <%= catEdit.status == 1 ? 'checked' : '' %> >
+                                    Hiển thị
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="status" value="0" <%= catEdit.status == 0 ? 'checked' : '' %> >
+                                    Tạm ẩn
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+               </div>
+               
+                
+            </div>
+            <div class="col-md-8">
+                <%- include('table.html')%>
+            </div>
+           </div>
+        </div>
+        <!-- /.box-body -->
+        
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+<%- include('../footer.html') %>

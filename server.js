@@ -14,6 +14,7 @@ server.engine('html',ejs.renderFile);
 require('./routes/home')(server);
 require('./routes/admin')(server);
 require('./routes/category')(server);
+require('./routes/product')(server);
 
 server.listen(3000, function() {
     console.log('Server dang mo tai cong: http://localhost:3000');

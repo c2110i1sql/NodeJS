@@ -211,18 +211,25 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li><a href="/admin"><i class="fa fa-circle-o text-aqua"></i> <span>Dashboard</span></a></li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-th"></i> <span>Category</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="http://localhost:3000/assets/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="http://localhost:3000/assets/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="/admin/category"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="/admin/categoryl/create"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
           </ul>
         </li>
-        
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Product</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/product"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="/admin/productl/create"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -1,15 +1,9 @@
 // file: routes/home.js
+var HomeController = require('../controllers/HomeController')
 module.exports = function(server) {
-    server.get('/', function(req, res) {
-        res.render('home')
-        
-    });
+    server.get('/', HomeController.index);
     
-    server.get('/about', function(req, res) {
-        res.render('about')
-    });
+    server.get('/about',  HomeController.about);
     
-    server.get('/contact', function(req, res) {
-        res.render('contact')
-    });
+    server.get('/contact',  HomeController.contact);
 }

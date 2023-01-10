@@ -1,9 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const ejs = require('ejs');
 
 
 const server = express();
+
+server.use(session({
+    secret: 'bkap-session',
+    resave: true,
+    saveUninitialized: false
+}));
+
 server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json()); //. api
 server.use(express.static('public'));

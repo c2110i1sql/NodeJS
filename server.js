@@ -27,6 +27,7 @@ server.engine('html',ejs.renderFile);
 // khong can kiemr tra login van vao duoc
 require('./routes/login')(server);
 require('./routes/home')(server);
+require('./routes/api')(server);
 
 // middleware => kieemr tra login truoc khi vao cacs  router
 server.use(function(req, res, next) {

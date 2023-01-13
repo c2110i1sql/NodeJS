@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const ejs = require('ejs');
+const cors = require('cors');
 
 const server = express();
 // global.login = 'sdsdsds';  // global trong mã nodejs
@@ -24,12 +25,7 @@ server.use(express.static('public'));
 server.set('view engine', 'html');
 server.engine('html',ejs.renderFile);
 
-server.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    next();
-})
+server.use(cors());
 
 // khong can kiemr tra login van vao duoc
 require('./routes/login')(server);

@@ -55,4 +55,36 @@ module.exports = function(server) {
         })
     });
 
+
+
+    server.post('/api/login', function(req, res) {
+        let sql = "SELECT id, name, email FROM users WHERE email = ? AND password = ?";
+        conn.query(sql,[req.body.email, req.body.password], function(err, data) {
+            if (err) {
+                res.send({
+                    result: req.body,
+                    status: false,
+                    message: 'Có lỗi từ phía máy chủ'
+                })
+               
+            } else if (data.length == 0) {
+                res.send({
+                    result: req.body,
+                    status: false,
+                    message: 'Email hoặc mật khẩu không đúng'
+                })
+               
+            } else {
+                let user = data[0];
+                res.send({
+                    result: user,
+                    status: true,
+                    message: ''
+                })
+            }
+            
+        });
+        
+    });
+
 }

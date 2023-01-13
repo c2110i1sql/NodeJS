@@ -4,7 +4,7 @@ const conn = require('../connect');
 
 module.exports = function(server) {
     server.get('/api/product', function(req, res) {
-        let sql = "SELECT p.*, c.name as cat_name FROM products p JOIN categories c ON p.category_id = c.id Order By p.id DESC";
+        let sql = "SELECT p.*,c.name, count(f.product_id) as f_count, f.user_id, f.id as f_id FROM products as p JOIN categories c ON p.category_id = c.id LEFT JOIN favorites as f ON p.id = f.product_id GROUP BY p.id Order By p.id DESC";
         conn.query(sql, function(err, data) {
             res.send({
                 result: data,
@@ -56,7 +56,6 @@ module.exports = function(server) {
     });
 
 
-
     server.post('/api/login', function(req, res) {
         let sql = "SELECT id, name, email FROM users WHERE email = ? AND password = ?";
         conn.query(sql,[req.body.email, req.body.password], function(err, data) {
@@ -85,6 +84,25 @@ module.exports = function(server) {
             
         });
         
+    });
+
+
+    server.post('/api/add-favorite', function(req, res) {
+        conn.query("INSERT INTO favorites SET ?", req.body, function(err) {
+            res.send({
+                result: req.body,
+                status: true
+            })
+        })
+    });
+
+    server.delete('/api/remove-favorite/:id', function(req, res) {
+        conn.query("DELETE FROM favorites WHERE id = ?", [req.params.id], function(err) {
+            res.send({
+                result: null,
+                status: true
+            })
+        })
     });
 
 }

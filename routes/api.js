@@ -104,5 +104,23 @@ module.exports = function(server) {
             })
         })
     });
+    
+    server.post('/api/upload', upload.single('my_file'), function(req, res) {
+        req.body.image = req.file.filename;
+        res.send({
+            result: req.file.filename,
+            status: true
+        })
+    });
 
+    
+    server.put('/api/update-profile/:id', function(req, res) {
+        let id = req.params.id;
+        conn.query("UPDATE users SET ? WHERE id = ?", [req.body, id], function(err) {
+            res.send({
+                result: req.body,
+                status: true
+            })
+        })
+    });
 }

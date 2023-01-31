@@ -38,9 +38,8 @@ server.use(function(req, res, next) {
         res.redirect('/admin/login');
     } else {
         server.locals.name = req.session.login.name;
+        next();
     }
-    
-    next();
 })
 
 // chia router

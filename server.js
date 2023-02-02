@@ -1,19 +1,22 @@
 const express = require('express');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const ejs = require('ejs');
 const cors = require('cors');
+const strategy = require('./passport-middleware');
+passport.use(strategy);
 
 const server = express();
 // global.login = 'sdsdsds';  // global trong mã nodejs
 // server.locals.email = 'adndc@gmail.cmol'; // global toàn bộ các file view
+server.use(passport.initialize());
 
 server.use(session({
     secret: 'bkap-session',
     resave: true,
     saveUninitialized: false
 }));
-
 
 
 // truyền biến global
@@ -33,14 +36,14 @@ require('./routes/home')(server);
 require('./routes/api')(server);
 
 // middleware => kieemr tra login truoc khi vao cacs  router
-server.use(function(req, res, next) {
-    if (!req.session.login) {
-        res.redirect('/admin/login');
-    } else {
-        server.locals.name = req.session.login.name;
-        next();
-    }
-})
+// server.use(function(req, res, next) {
+//     if (!req.session.login) {
+//         res.redirect('/admin/login');
+//     } else {
+//         server.locals.name = req.session.login.name;
+//         next();
+//     }
+// })
 
 // chia router
 require('./routes/admin')(server);

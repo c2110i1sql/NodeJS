@@ -1,9 +1,14 @@
 // file: routes/admin.js
+const jwt = require('jsonwebtoken');
 const upload = require('../upload');
 const conn = require('../connect');
+const passport = require('passport');
+
+let JwtOptions = {};
+JwtOptions.secretOrKey = "BKAPXYZ";
 
 module.exports = function(server) {
-    server.get('/api/product', function(req, res) {
+    server.get('/api/product', passport.authenticate('jwt', {session: false}), function(req, res) {
         let sql = "SELECT p.*,c.name, count(f.product_id) as f_count, f.user_id, f.id as f_id FROM products as p JOIN categories c ON p.category_id = c.id LEFT JOIN favorites as f ON p.id = f.product_id GROUP BY p.id Order By p.id DESC";
         conn.query(sql, function(err, data) {
             res.send({
@@ -75,8 +80,12 @@ module.exports = function(server) {
                
             } else {
                 let user = data[0];
+                // console.log(user);
+                let payload = {id: user.id};
+                let token = jwt.sign(payload, JwtOptions.secretOrKey);
                 res.send({
                     result: user,
+                    token: token,
                     status: true,
                     message: ''
                 })
@@ -122,5 +131,15 @@ module.exports = function(server) {
                 status: true
             })
         })
+    });
+
+    server.get('/api/test', function(req, res) {
+        // if (true) {
+            res.status(500).send({
+                result: {id: 1, method: req.method},
+                status: true
+            })
+        // }
+       
     });
 }

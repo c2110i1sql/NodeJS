@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const upload = require('../upload');
 const conn = require('../connect');
 const passport = require('passport');
+const fs = require('fs');
 
 let JwtOptions = {};
 JwtOptions.secretOrKey = "BKAPXYZ";
@@ -83,9 +84,9 @@ module.exports = function(server) {
                 // console.log(user);
                 let payload = {id: user.id};
                 let token = jwt.sign(payload, JwtOptions.secretOrKey);
+                user.token = token;
                 res.send({
                     result: user,
-                    token: token,
                     status: true,
                     message: ''
                 })
@@ -133,13 +134,28 @@ module.exports = function(server) {
         })
     });
 
-    server.get('/api/test', function(req, res) {
-        // if (true) {
-            res.status(500).send({
-                result: {id: 1, method: req.method},
-                status: true
-            })
-        // }
+    server.get('/api/check-token-expired', function(req, res) {
+        // fs.unlink('public/uploads/anh.jpg');
+        let tokenFromClient = req.headers["authorization"].split(' ');
+        let token = tokenFromClient.length > 1 ? tokenFromClient[1] : null;
+        jwt.verify(token, JwtOptions.secretOrKey, function(err, dataInToken) {
+            if (err) {
+                res.send({
+                    result: err,
+                    status: false
+                })
+            } else {
+                let iat = dataInToken.iat; // tinh theo giay
+                let currentTime = new Date().getTime() / 1000;
+                let thoi_gian = currentTime - iat;
+                res.send({
+                    result: dataInToken,
+                    thoi_gian: thoi_gian,
+                    currentTime: currentTime,
+                    status: true
+                })
+            }
+        });
        
     });
 }

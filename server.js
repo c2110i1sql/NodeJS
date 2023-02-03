@@ -36,14 +36,14 @@ require('./routes/home')(server);
 require('./routes/api')(server);
 
 // middleware => kieemr tra login truoc khi vao cacs  router
-// server.use(function(req, res, next) {
-//     if (!req.session.login) {
-//         res.redirect('/admin/login');
-//     } else {
-//         server.locals.name = req.session.login.name;
-//         next();
-//     }
-// })
+server.use(function(req, res, next) {
+    if (!req.session.login) {
+        res.redirect('/admin/login');
+    } else {
+        server.locals.name = req.session.login.name;
+        next();
+    }
+})
 
 // chia router
 require('./routes/admin')(server);

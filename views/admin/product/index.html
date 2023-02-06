@@ -77,6 +77,27 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="panel-footer form-inline">
+                            
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a></li>
+                                <% for(let i = 1; i <= numPage; i++) {%>
+                                <li class="<%= page == i ? 'active' : '' %>"><a href="?page=<%= i %>&limit=<%= limit %>"><%= i %></a></li>
+                                <% } %>
+                            </ul>
+
+                            <select class="form-control" onchange="location.assign('?limit='+this.value)">
+                                <option value="">SHow</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="500">500</option>
+                            </select>
+                            
+                        </div>
                     </div>
 
                 </div>
